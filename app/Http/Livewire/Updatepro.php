@@ -62,6 +62,14 @@ class Updatepro extends Component
        $this->getproid(\request()->id);
 
     }
+    public function render()
+    {
+        $this->mount();
+        $this->calk();
+
+        return view('livewire.updatepro',['data' => customer::get()]);
+
+    }
     public function calk(){
 
         if(!empty($this->rem_amount) && !empty($this->prem_lemt)) {
@@ -273,13 +281,6 @@ class Updatepro extends Component
 
 
     }
-    public function render()
-    {
-        $this->mount();
-        $this->calk();
-
-        return view('livewire.updatepro',['data' => customer::get()]);
-
-    }
+  
 
 }

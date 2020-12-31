@@ -1,25 +1,14 @@
 <div>
 
 
-        <div class="content-wrapper">
-            <div id="getmessage22">
-                @if (session()->has('message'))
-                    <div  class="alert alert-success alert-dismissible bg-success text-white border-0 fade show timeout" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        <strong>{{ session('message') }} </strong>
-                    </div>
-
-                @endif
-            </div>
+      
 
             <div class="page-title">
                 <div>
-                    <h1> التقارير</h1>
+                    <h1>  تقارير المبيعات</h1>
                     <ul class="breadcrumb side">
                         <li><i class="fa fa-home fa-lg"></i></li>
-                        <li> المتاخرين عن السداد</li>//
+                        <li>   تقارير المبيعات</li>//
                         <li class="active"><a href="/">الرئيسيه</a></li>//
                         <li class="active"><a href="/grop">العملاء</a></li>//
                         <li class="active"><a href="/prodect">المنتجات</a></li>//
@@ -29,27 +18,66 @@
                     </ul>
                 </div>
             </div><!--end bred cramp-->
+         
+        
+       
             <div class="row">
+         
+                <div class="col-sm-6 col-md-6">
+                    <div class="card">
+    
+                        <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-5">
+                           <h6>اجمالى المبيعات</h6>
 
+                          </div>
+                          <div class="col-md-7">
+                   <span>{{ $data }}</span>
+ 
+                           </div>
+
+                  
+
+                        </div><!--endrow--->
+                  
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <div class="card">
+    
+                        <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>عدد عمليات  المبيعات</h6>
+     
+                                </div>
+                                <div class="col-md-6">
+                                    <span>{{ $count }}</span>
+      
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card" style="margin-top: 10px">
                         <div class="card-body">
 
                             <div class="row">
-            
+
                                 <div class="col-md-5 form-group">
-                               <input type="date" wire:model="datestart" class="form-control datetimepicker1"placeholder="مثال 10-2-2020">
+                               <input type="date" wire:model="datestart" class="form-control" style="color:black;background-color:#fff">
                                 </div>
                                 <div class="col-md-5 form-group">
-                               <input type="date" wire:model="dateend" class="form-control datetimepicker1" placeholder="مثال 10-5-2020">
+                               <input type="date" wire:model="dateend"class="form-control" style="color:black;background-color:#fff">
                                 </div>
                                 <div class="col-md-2 form-group">
                                     <button type="button" wire:click="getdate" class="btn btn-primary">ابحث</button>
                                 </div>
-                                <div class="col-md-3 form-group">
-                                    <button type="button" wire:click.prevent="resetinp" class="btn btn-danger">الوضع الافتراضى</button>
-                                </div>
+                         
                               <div class="col-md-3 form-group">
                                     <button type="button" class=" print btn btn-warning" onclick="window.print()">طباعه <i class="fa fa-print" aria-hidden="true"></i>
                                     </button>
@@ -82,23 +110,78 @@
 
 
                             </div>
+                       
+                                
+                         
+                     
                             <!--end massge-->
+            
+                    
+                  
+                                    @if ($status) 
+                                        <div class="row">
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="card" style="background-color: rgb(0 0 0)">
+                        
+                                            <div class="card-body">
+                                            <div class="row">
+                                              <div class="col-md-5">
+                                               <h6>اجمالى المبيعات</h6>
+                    
+                                              </div>
+                                              <div class="col-md-7">
+                                       <span>{{ $getsum }}</span>
+                     
+                                               </div>
+                    
+                                      
+                    
+                                            </div><!--endrow--->
+                                      
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-sm-6 col-md-6">
+                                        <div class="card" style="background-color:#020817">
+                        
+                                            <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h6>عدد عمليات  المبيعات</h6>
+                         
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span>{{ $getcount }}</span>
+                          
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                              @if ($getdata->count() > 0)
                             <!---------table------>
 
 
                                 <div class=" table-responsive" id="printt">
-                                    <table id="multi_col_order22"
+                                    <table id="multi_col_order22" style="margin-top: 17px;"
                                            class=" pr table table-striped table-bordered text-center table-hover  display no wrap" >
                                         <thead style=" background-color: #3c0303;">
 
                                         <tr>
-                                            <th>#</th>
+                                       
                                             <th>اسم العميل</th>
                                             <th> اسم المنتج</th>
-                                            <th> القسط الشهرى</th>
-                                            <th> المبلغ المدفوع</th>
-                                            <th> رقم الموبايل</th>
-                                            <th>  الملاحظات</th>
+                                
+                                            <th>  سعر المنتج</th>
+                                       
                                             <th>  التاريخ</th>
 
 
@@ -109,34 +192,26 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if($getaction->count() > 0)
-                                        @foreach($getaction as $index => $cat)
+                                   
+                                        @foreach($getdata  as  $cat)
 
+                    
 
-
-                                            <tr class="{{$cat->amount_manth >= $cat->prodect->prem_manth ?"iscomp":""}}">
-                                                <td>{{$index+1}}</td>
+                                            <tr>
+                                           
                                                 <td>{{$cat->customer->name}}</td>
-                                                <td>{{$cat->prodect->prodect_name}}</td>
-                                                <td>{{$cat->prodect->prem_manth}}</td>
-                                                <td>{{$cat->amount_manth }}</td>
-                                                <td>{{$cat->customer->phone }}</td>
+                                                <td>{{$cat->prodect_name}}</td>
+                                                <td>{{$cat->prodect_price}}</td>
+                                     
+                                           
 
-                                                <td>{{   $cat->disc2  }} <br>
-
-
-                                                    <a href="javscript:void(0)" wire:click=edit({{$cat->id}}) data-toggle="modal" data-target="#show1">{{ substr($cat->discrption,0,20)}}</a>
-
-
-                                                </td>
+                      
 
 
                                                 <td>
                                                     {{$cat->date}}
                                                 </td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary btn-sm mb-1" data-toggle="modal"  style="display: inline-block"> <i class="fa fa-user" aria-hidden="true"></i></a>
-                                                </td>
+                                     
                                             </tr>
 
                                         @endforeach
@@ -146,7 +221,7 @@
                                                 $("#getmessage33").fadeIn(500);
 
                                             </script>
-                                        @endif
+                                         @endif
                                         </tbody>
                                     </table>
 
@@ -155,20 +230,22 @@
 
                                     <div class="row">
                                         <div class="col-md-8">
-                                            {{$getaction->links()}}
+                                            {{$getdata->links()}}
                                         </div>
                                         <div class="col-md-4 mr-auto">
 
 
-                                            <span class="text-light">  عرض {{$sel}} سجلات من اجمالى السجلات   {{$counts}} </span>
+                                            <span class="text-light">  عرض {{$sel}} سجلات من اجمالى السجلات   </span>
                                         </div>
                                     </div>
-
+                                
+                                    @endif
                                             <!-- Danger Alert Modal -->
                                     </div>
 
 
                                 </div>
+                         
                                 <!-------------end table-------->
 
                         </div>

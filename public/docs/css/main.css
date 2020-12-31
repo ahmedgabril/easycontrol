@@ -21688,6 +21688,7 @@ input[type="button"].btn-block {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1.25rem;
+    color: #fff;
 }
 
 .card-title {
@@ -33504,4 +33505,8 @@ be a descendant of the grid when it is being dragged.
 .user .user-settings label {
     color: #666;
 }
-
+.xdsoft_datetimepicker .xdsoft_datepicker {
+    width: 300px!important;
+    float: left;
+    margin-left: 8px;
+}

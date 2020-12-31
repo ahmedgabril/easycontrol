@@ -140,7 +140,7 @@
                                                 </td>
                                                 <td>{{$cat->teker_name}}</td>
                                                 <td>
-                                                    <a href="#" wire:click.prevent="edit({{$cat->id}})" class="btn btn-primary btn-sm mb-1"   style="display: inline-block"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <button type="button" wire:click="edit({{$cat->id}})" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target=".bd-example-modal-lg-update" style="display: inline-block"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                                                     <button type="button" wire:click.prevent="showname({{$cat->id}})"class="btn btn-danger btn-sm" data-toggle="modal" data-target="#danger-alert-modal"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </td>
                                             </tr>
@@ -243,6 +243,157 @@
                 </div>
 
                 <!-------------------model------>
+
+                <!--------------modelupdate------>
+
+                <div class="modal fade bd-example-modal-lg-update"  wire:ignore.self tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">تعديل بيانات صنف</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                    
+                                            <div class="row">
+                                       
+                    
+                                                <div class="form-group col-md-4">
+                                                    <input type="text" id="inputValid" wire:model="prodect_name"class="form-control {{$prodect_name == ""?"":"is-valid"}}" placeholder="ادخل اسم المنتج">
+                                                    @error('prodect_name')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                    
+                                                <div class="form-group col-md-4" wire:ignore>
+                                                    <select  wire:model="customer_name"class="form-control customer1  demoSelect {{$customer_name == ""?"":"is-valid"}} "  wire:model="customer_name"required >
+                                                        <option value="">اختر اسم العميل</option>
+                                                        @foreach($data1 as $getdata)
+                    
+                                                            <option value="{{$getdata->id}}">  {{$getdata->name}} </option>
+                    
+                                                        @endforeach
+                    
+                    
+                                                    </select>
+                                                    @error('customer_name')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                    
+                                                <div class="form-group col-md-4">
+                                                    <input type="date" class="form-control {{$date == ""?"":"is-valid"}}" wire:model="date" style="background:#fff;color:#000000">
+                                                    @error('date')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number" wire:model="prodect_price"class="form-control {{$prodect_price == ""?"":"is-valid"}} " placeholder="ادخل  سعر المنتج">
+                                                    @error('prodect_price')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                    
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"   wire:model="amount_pay"class="form-control {{$amount_pay == ""?"":"is-valid"}}" placeholder="  المبلغ المدفوع مقدما">
+                                                    @error('amount_pay')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"   wire:model="precent" class="form-control {{$precent == ""?"":"is-valid"}} " placeholder=" هامش الربح %">
+                                                    @error('precent')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"  wire:model="rem_amount"class="form-control {{$rem_amount == ""?"":"is-valid"}} " placeholder="  المبلغ المتبقى ">
+                                                    @error('rem_amount')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"  wire:model="prem_lemt"class="form-control {{$prem_lemt == ""?"":"is-valid"}} " placeholder="   مده القسط ">
+                                                    @error('prem_lemt')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"  wire:model="manthpay"class="form-control {{$manthpay == ""?"":"is-valid"}} " placeholder="   القسط الشهرى ">
+                                                    @error('manthpay')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <hr>
+                    
+                                                <div class="form-group col-md-4">
+                                                    <input type="text"   wire:model="taker_name"class="form-control {{$taker_name == ""?"":"is-valid"}}" placeholder="   اسم الضامن {اختيارى} ">
+                                                    @error('taker_name')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"  wire:model="taker_phone"class="form-control {{$taker_phone == ""?"":"is-valid"}} " placeholder="   موبايل {اختيارى} ">
+                                                    @error('taker_phone')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <input type="number"   wire:model="taker_id"class="form-control {{$taker_id == ""?"":"is-valid"}}" placeholder="  رقم بطاقه {اختيارى} ">
+                                                    @error('taker_id')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <textarea class="form-control {{$descrption == ""?"":"is-valid"}} " rows="4" wire:model="descrption" placeholder=" ملاحظات {اختيارى}"></textarea>
+                                                    @error('descrption')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                    
+                    
+                                                <div class="form-group col-md-6">
+                                                    <button type="button" wire:click.prevent="update" class="btn btn-primary">تعديل منتج <i class="fa fa-pencil-square-o"></i></button>
+                                                </div>
+                    
+                                            </div><!----end inner row--->
+                    
+                                        </div><!----card -body--->
+                                    </div><!----card--->
+                                </div><!---end man col--->
+        
+                            </div>
+        
+        
+                        </div>
+                    </div>
+                </div>
+
+
+                <!----------------------model update end----------->
             </div><!--end row-->
         </div><!--end content-wrapper-->
     </div>
+    @push('scripts')
+    <script>
+
+        $(function(){
+
+            $(".customer1").on("change",function (e) {
+                let data1 = $(this).val();
+                // @this.set("tes",e.target.value);
+            @this.set("customer_name",data1) ;
+                // alert( $(this).val());
+
+
+            });
+       
+
+        });
+    </script>
+@endpush

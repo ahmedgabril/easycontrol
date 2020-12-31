@@ -18,15 +18,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
-  {{--}}
-    <link href="docs/js/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
-    <link href="docs/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
-    {{--}}
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="docs/js/plugins/datej/dist/daterangepicker.min.css">
+
+    <link rel="stylesheet" type="text/css" href="docs\js\plugins\dater\daterangepicker.css" >
+    <link rel="stylesheet" type="text/css" href="docs\js\plugins\date3\css\bootstrap-material-datetimepicker.css" >
+
     <link rel="stylesheet" type="text/css" href="docs/css/main.css">
 
+
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 
     @livewireStyles
@@ -140,6 +144,12 @@
 
 
     }) ;
+    window.livewire.on('update1',function(){
+        $(".bd-example-modal-lg-update").modal("hide");
+
+
+
+    }) ;
     window.livewire.on('del',function(){
         $("#danger-alert-modal").modal("hide");
 
@@ -159,6 +169,12 @@
 
         });
 
+       $(".bd-example-modal-lg-update").on('hidden.bs.modal',function () {
+            livewire.emit('getval');
+
+        });
+
+
 
         $('#dark-header-modal-update1').on('hidden.bs.modal',function () {
             livewire.emit('restformcat');
@@ -170,28 +186,81 @@
 
 
 </script>
-{{--}}
-<script src="docs/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.ar.min.js"charset="UTF-8"></script>
 
-<script src="docs/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-{{--}}
+
 
 <script src="docs/js/main.js"></script>
 <!-- The javascript plugin to display page loading on top-->
 <script src="docs/js/plugins/pace.min.js"></script>
-<script src="docs/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="docs/js/plugins/select2.min.js"></script>
 
+<script type="text/javascript" src="docs/js/plugins/date3/moment.min.js"></script>
+<script type="text/javascript" src="docs/js/plugins/date3/js/bootstrap-material-datetimepicker.js"></script>
+{{--}}
+<script src="docs/js/plugins/dater/moment.min.js"></script>
+<script src="docs/js/plugins/dater/daterangepicker.js"></script>
+
+
+<script type="text/javascript" src="docs/js/plugins/datej/moment.min.js"></script>
+<script type="text/javascript" src="docs/js/plugins/datej/jquery.min.js"></script>
+<script type="text/javascript" src="docs/js/plugins/datej/dist/jquery.daterangepicker.min.js"></script>
+{{--}}
+
+<script type="text/javascript" src="docs/js/plugins/select2.min.js"></script>
 
 
 <!-- Page specific javascripts-->
 
 
+
+
+
 <!-- Google analytics script-->
+{{--}}
 <script type="text/javascript">
 
 
-    $('#demoSelect').select2();
+    $('.demoSelect').select2();
+
+
+    $(function() {
+
+var start = moment().subtract(29, 'ايام');
+var end = moment();
+
+function cb(start, end) {
+  
+    
+    
+    //$('.reportrange span').html(start.format('YYYY,MM,DD') + ' - ' + end.format('YYYY,MM,DD'));
+    $('.reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+
+}
+
+$('.reportrange').daterangepicker({
+    startDate: start,
+    alwaysShowCalendars:true,
+ 
+    showDropdowns: true,
+    endDate: end,
+    ranges: {
+       'اليوم': [moment(), moment()],
+       'الامس': [moment().subtract(1, 'ايام'), moment().subtract(1, 'ايام')],
+       'اخر 7 ايام': [moment().subtract(6, 'ايام'), moment()],
+       'اخر 30 يوم': [moment().subtract(29, 'ايام'), moment()],
+       'هذا الشهر ': [moment().startOf('شهر'), moment().endOf('شهر')],
+       'اخر شهر ': [moment().subtract(1, 'شهر').startOf('شهر'), moment().subtract(1, 'شهر').endOf('شهر')]
+    }
+}, cb);
+
+cb( end,start);
+
+});
+{{--}}
+<script type="text/javascript">
+
+$('.datepicker').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
 
 
     if(document.location.hostname == 'pratikborsadiya.in') {

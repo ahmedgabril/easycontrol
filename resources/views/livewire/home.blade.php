@@ -1,20 +1,26 @@
 <div>
-{{$tes1}}
-{{$tes}}
-    <div class="col-md-5 form-group" wire:ignore>
-        <select class="form-control get-c-p1"   id="demoSelect" wire:model="tes">
-            <option>اختر اسم العميل</option>
-           <option value="0">ahmed</option>
-           <option value="1">all</option>
-        </select>
-    </div>
 
-        <select class=""   wire:model="tes1">
-            <option>اختر اسم العميل</option>
-           <option value="0">g</option>
-           <option value="1">c</option>
-        </select>
 
+    {{$dater}}
+   
+      
+        
+    <div class="row clearfix">
+        <div class="col-xs-3">
+            <h2 class="card-inside-title">Text Input</h2>
+            <div class="form-group">
+                <div class="form-line " id="bs_datepicker_container">
+                    <input type="text" class="form-control datepicker" placeholder="Please choose a date...">
+                </div>
+            </div>
+        </div>
+      
+        
+        <input type="text" class="reportrange1" wire:model="dater" />
+       
+          
+        
+ 
 
 
 </div>
@@ -23,9 +29,9 @@
 
         $(function(){
 
-            $(".get-c-p1").on("change",function (e) {
+            $(".reportrange1").on("change",function (e) {
                 // @this.set("tes",e.target.value);
-                 @this.set("tes",e.target.value) ;
+                 @this.set("dater",e.target.value) ;
                // alert( $(this).val());
             });
         });
